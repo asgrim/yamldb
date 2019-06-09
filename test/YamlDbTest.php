@@ -27,7 +27,7 @@ final class YamlDbTest extends TestCase
     {
         parent::setUp();
 
-        $this->filename = 'test.ydb';
+        $this->filename = 'test.yaml';
         $this->yamlDb   = new YamlDb($this->filename);
     }
 
