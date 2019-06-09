@@ -7,6 +7,11 @@ namespace AsgrimUnitTest\YamlDb;
 use Asgrim\YamlDb\YamlDb;
 use Asgrim\YamlDb\YamlId;
 use PHPUnit\Framework\TestCase;
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+use function sprintf;
+use function unlink;
 
 final class YamlDbTest extends TestCase
 {
@@ -21,19 +26,21 @@ final class YamlDbTest extends TestCase
         parent::setUp();
 
         $this->filename = 'test.ydb';
-        $this->yamlDb = new YamlDb($this->filename);
+        $this->yamlDb   = new YamlDb($this->filename);
     }
 
     public function tearDown() : void
     {
         parent::tearDown();
 
-        if (file_exists($this->filename)) {
-            unlink($this->filename);
+        if (! file_exists($this->filename)) {
+            return;
         }
+
+        unlink($this->filename);
     }
 
-    public function testInsert()
+    public function testInsert() : void
     {
         $id = $this->yamlDb->insert(['foo' => 'bar']);
 
@@ -47,7 +54,7 @@ DOC,
         );
     }
 
-    public function testFindById()
+    public function testFindById() : void
     {
         $id = YamlId::new();
 

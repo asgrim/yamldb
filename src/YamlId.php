@@ -20,18 +20,19 @@ final class YamlId
     }
 
     /** @throws Exception */
-    public static function new(): self
+    public static function new() : self
     {
         return new self(Uuid::uuid4());
     }
 
-    public static function fromString(string $id): self
+    public static function fromString(string $id) : self
     {
         Assert::that($id)->uuid();
+
         return new self(Uuid::fromString($id));
     }
 
-    public function asString(): string
+    public function asString() : string
     {
         return $this->id->toString();
     }
