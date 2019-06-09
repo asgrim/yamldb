@@ -1,0 +1,33 @@
+{
+    "name": "asgrim/yamldb",
+    "description": "YamlDB",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Titcumb",
+            "email": "james@asgrim.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3.0,<7.4.0",
+        "symfony/yaml": "^4.3",
+        "beberlei/assert": "^3.2",
+        "ramsey/uuid": "^3.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.2",
+        "vimeo/psalm": "^3.4",
+        "doctrine/coding-standard": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Asgrim\\YamlDb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AsgrimUnitTest\\YamlDb\\": "test/"
+        }
+    }
+}
