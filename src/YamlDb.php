@@ -23,12 +23,13 @@ final class YamlDb
         $this->filename = $filename;
     }
 
-    // @todo maybe YamlDb\Storage\Persistence
+    /** @param mixed[] $dbContent */
     private function persist(array $dbContent) : void
     {
         file_put_contents($this->filename, Yaml::dump($dbContent));
     }
 
+    /** @return mixed[] */
     private function load() : array
     {
         if (! file_exists($this->filename)) {
@@ -38,6 +39,7 @@ final class YamlDb
         return Yaml::parseFile($this->filename);
     }
 
+    /** @param mixed[] $data */
     public function insert(array $data) : YamlId
     {
         $id = YamlId::new();
@@ -50,6 +52,7 @@ final class YamlDb
         return $id;
     }
 
+    /** @return mixed[] */
     public function findById(YamlId $id) : array
     {
         $dbContent = $this->load();

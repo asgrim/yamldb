@@ -6,6 +6,7 @@ namespace AsgrimUnitTest\YamlDb;
 
 use Asgrim\YamlDb\YamlDb;
 use Asgrim\YamlDb\YamlId;
+use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
 use function file_exists;
 use function file_get_contents;
@@ -13,6 +14,7 @@ use function file_put_contents;
 use function sprintf;
 use function unlink;
 
+/** @covers \Asgrim\YamlDb\YamlDb */
 final class YamlDbTest extends TestCase
 {
     /** @var string */
@@ -64,5 +66,13 @@ DOC,
             ['foo' => 'bar'],
             $this->yamlDb->findById($id)
         );
+    }
+
+    public function testFindByIdThrowsExceptionWhenNotFound() : void
+    {
+        $id = YamlId::new();
+
+        $this->expectException(OutOfBoundsException::class);
+        $this->yamlDb->findById($id);
     }
 }
