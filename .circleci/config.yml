@@ -23,3 +23,7 @@ jobs:
           name: "Coding style"
           command: |
             vendor/bin/phpcs
+      - run:
+          name: "Mutation tests"
+          command: |
+            vendor/bin/infection --min-msi=80 --min-covered-msi=80
