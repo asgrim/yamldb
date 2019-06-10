@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Asgrim\YamlDb;
 
-use Assert\Assert;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -27,8 +26,6 @@ final class YamlId
 
     public static function fromString(string $id) : self
     {
-        Assert::that($id)->uuid();
-
         return new self(Uuid::fromString($id));
     }
 
