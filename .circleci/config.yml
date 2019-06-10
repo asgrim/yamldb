@@ -26,4 +26,4 @@ jobs:
       - run:
           name: "Mutation tests"
           command: |
-            vendor/bin/infection --min-msi=80 --min-covered-msi=80
+            vendor/bin/infection --min-msi=95 --min-covered-msi=95
