@@ -18,7 +18,7 @@ jobs:
       - run:
           name: "Unit tests"
           command: |
-            make unit
+            make test
       - run:
           name: "Coding style"
           command: |
