@@ -13,7 +13,11 @@ Install with `composer require asgrim/yamldb`.
 ## Usage
 
 ```php
-$yamlDb = new \Asgrim\YamlDb\YamlDb('storage.yaml');
+use Asgrim\YamlDb\Database\FlysystemBackedYamlDb;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
+
+$yamlDb = new FlysystemBackedYamlDb(new Filesystem(new Local('/var/lib/yamldb')));
 
 $generatedId = $yamlDb->insert(['foo' => 'bar']);
 
