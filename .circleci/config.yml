@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.3-cli-stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: |
+            sudo composer self-update
+            composer install -n --prefer-dist
+      - run:
+          name: "Static analysis"
+          command: |
+            vendor/bin/psalm
+      - run:
+          name: "Unit tests"
+          command: |
+            vendor/bin/psalm
+      - run:
+          name: "Coding style"
+          command: |
+            vendor/bin/phpcs
+      - run:
+          name: "Mutation tests"
+          command: |
+            vendor/bin/infection --min-msi=95 --min-covered-msi=95
