@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AsgrimUnitTest\YamlDb;
+namespace AsgrimUnitTest\YamlDb\Database;
 
-use Asgrim\YamlDb\YamlDb;
+use Asgrim\YamlDb\Database\FlysystemBackedYamlDb;
 use Asgrim\YamlDb\YamlId;
+use Exception;
 use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
 use function file_exists;
@@ -14,13 +15,13 @@ use function file_put_contents;
 use function sprintf;
 use function unlink;
 
-/** @covers \Asgrim\YamlDb\YamlDb */
-final class YamlDbTest extends TestCase
+/** @covers \Asgrim\YamlDb\Database\FlysystemBackedYamlDb */
+final class FlysystemBackedYamlDbTest extends TestCase
 {
     /** @var string */
     private $filename;
 
-    /** @var YamlDb */
+    /** @var FlysystemBackedYamlDb */
     private $yamlDb;
 
     public function setUp() : void
@@ -28,7 +29,7 @@ final class YamlDbTest extends TestCase
         parent::setUp();
 
         $this->filename = 'test.yaml';
-        $this->yamlDb   = new YamlDb($this->filename);
+        $this->yamlDb   = new FlysystemBackedYamlDb($this->filename);
     }
 
     public function tearDown() : void
@@ -56,6 +57,7 @@ DOC,
         );
     }
 
+    /** @throws Exception */
     public function testFindById() : void
     {
         $id = YamlId::new();
@@ -68,11 +70,13 @@ DOC,
         );
     }
 
+    /** @throws Exception */
     public function testFindByIdThrowsExceptionWhenNotFound() : void
     {
         $id = YamlId::new();
 
         $this->expectException(OutOfBoundsException::class);
+        /** @noinspection UnusedFunctionResultInspection */
         $this->yamlDb->findById($id);
     }
 }

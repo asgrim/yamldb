@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AsgrimUnitTest\YamlDb;
 
 use Asgrim\YamlDb\YamlId;
+use Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -18,6 +19,7 @@ final class YamlIdTest extends TestCase
         YamlId::fromString('not a uuid');
     }
 
+    /** @throws Exception */
     public function testValidYamlIdCanBeCreatedAndStringified() : void
     {
         $uuid = Uuid::uuid4();
@@ -25,6 +27,7 @@ final class YamlIdTest extends TestCase
         self::assertSame($uuid->toString(), $id->asString());
     }
 
+    /** @throws Exception */
     public function testNewYamlIdCanBeGenerated() : void
     {
         $id = YamlId::new();

@@ -15,6 +15,9 @@ static-analysis: ## runs static analysis
 check-cs: ## check coding standards
 	vendor/bin/phpcs
 
+fix-cs: ## auto-fix coding standards
+	vendor/bin/phpcbf
+
 mutation-test: ## runs mutation testing with allowed MSI threshold
 	vendor/bin/infection --min-msi=95 --min-covered-msi=95
 
