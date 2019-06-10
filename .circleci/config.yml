@@ -14,16 +14,16 @@ jobs:
       - run:
           name: "Static analysis"
           command: |
-            vendor/bin/psalm
+            make static-analysis
       - run:
           name: "Unit tests"
           command: |
-            vendor/bin/psalm
+            make test
       - run:
           name: "Coding style"
           command: |
-            vendor/bin/phpcs
+            make check-cs
       - run:
           name: "Mutation tests"
           command: |
-            vendor/bin/infection --min-msi=95 --min-covered-msi=95
+            make mutation-test
