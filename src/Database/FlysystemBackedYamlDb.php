@@ -7,36 +7,55 @@ namespace Asgrim\YamlDb\Database;
 use Asgrim\YamlDb\YamlDb;
 use Asgrim\YamlDb\YamlId;
 use Exception;
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
+use League\Flysystem\FilesystemInterface;
 use OutOfBoundsException;
+use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 use function array_key_exists;
-use function file_exists;
-use function file_put_contents;
+use function is_string;
 
 final class FlysystemBackedYamlDb implements YamlDb
 {
-    /** @var string */
-    private $filename;
+    private const FIXED_YAML_DB_FILE = 'database.yaml';
 
-    public function __construct(string $filename)
+    /** @var FilesystemInterface */
+    private $dataPath;
+
+    public function __construct(FilesystemInterface $dataPath)
     {
-        $this->filename = $filename;
+        $this->dataPath = $dataPath;
     }
 
-    /** @param mixed[] $dbContent */
+    /**
+     * @param mixed[] $dbContent
+     *
+     * @throws FileExistsException
+     */
     private function persist(array $dbContent) : void
     {
-        file_put_contents($this->filename, Yaml::dump($dbContent));
+        $this->dataPath->write(self::FIXED_YAML_DB_FILE, Yaml::dump($dbContent));
     }
 
-    /** @return mixed[] */
+    /**
+     * @return mixed[]
+     *
+     * @throws FileNotFoundException
+     */
     private function load() : array
     {
-        if (! file_exists($this->filename)) {
+        if (! $this->dataPath->has(self::FIXED_YAML_DB_FILE)) {
             return [];
         }
 
-        return Yaml::parseFile($this->filename);
+        $fileContent = $this->dataPath->read(self::FIXED_YAML_DB_FILE);
+
+        if (! is_string($fileContent)) {
+            throw new RuntimeException('Failed to load file');
+        }
+
+        return Yaml::parse($fileContent);
     }
 
     /**
@@ -56,7 +75,11 @@ final class FlysystemBackedYamlDb implements YamlDb
         return $id;
     }
 
-    /** @return mixed[] */
+    /**
+     * @return mixed[]
+     *
+     * @throws FileNotFoundException
+     */
     public function findById(YamlId $id) : array
     {
         $dbContent = $this->load();
