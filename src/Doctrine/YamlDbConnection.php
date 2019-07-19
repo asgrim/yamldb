@@ -21,11 +21,13 @@ final class YamlDbConnection implements Connection
         $this->yamlDb = $yamlDb;
     }
 
-    public function prepare($prepareString) : Statement
+    /** @param string $prepareString */
+    public function prepare($prepareString) : Statement // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         return new YamlDbStatement($prepareString, $this->yamlDb);
     }
 
+    /** @param string $sqlString */ //phpcs:ignore Squiz.Commenting.FunctionComment.ExtraParamComment
     public function query() : Statement
     {
         $args = func_get_args();
@@ -35,14 +37,17 @@ final class YamlDbConnection implements Connection
 
     /**
      * @param mixed $input
+     * @param int   $type
+     *
      * @return mixed
      */
-    public function quote($input, $type = ParameterType::STRING)
+    public function quote($input, $type = ParameterType::STRING) // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         return $input;
     }
 
-    public function exec($statement) : int
+    /** @param string $statement */
+    public function exec($statement) : int // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         $doctrineStatement = $this->prepare($statement);
         $doctrineStatement->execute();
@@ -50,7 +55,8 @@ final class YamlDbConnection implements Connection
         return $doctrineStatement->rowCount();
     }
 
-    public function lastInsertId($name = null) : string
+    /** @param string|null $name */
+    public function lastInsertId($name = null) : string // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         $lastInsertId = $this->yamlDb->lastInsertId();
 
@@ -77,6 +83,7 @@ final class YamlDbConnection implements Connection
         return null;
     }
 
+    /** @return mixed[] */
     public function errorInfo() : array
     {
         return [];

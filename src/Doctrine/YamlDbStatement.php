@@ -28,7 +28,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
 {
     private const SUPPORTED_INSERT_FORMAT = "/INSERT INTO ([a-zA-Z0-9_-]+) \(((?:[a-zA-Z0-9_-]+[, ]*)+)\) VALUES\s?\(((?:[a-zA-Z0-9_\'\?-]+[, ]*)+)\)/";
 
-    /** var string */
+    /** @var string */
     private $statement;
 
     /** @var YamlDb */
@@ -59,11 +59,13 @@ final class YamlDbStatement implements IteratorAggregate, Statement
         return $this->replaceParamsInStatement($statement, $params);
     }
 
+    // phpcs:ignore SlevomatCodingStandard.Classes.UnusedPrivateElements.UnusedMethod
     private function unquoteIdentifier(string $value) : string
     {
         return trim($value, "` \t\n\r\0\x0B");
     }
 
+    // phpcs:ignore SlevomatCodingStandard.Classes.UnusedPrivateElements.UnusedMethod
     private function unquoteValue(string $value) : string
     {
         return trim($value, "\"' \t\n\r\0\x0B");
@@ -99,47 +101,84 @@ final class YamlDbStatement implements IteratorAggregate, Statement
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    public function setFetchMode($fetchMode, $arg2 = null, $arg3 = null) : bool
+    /**
+     * @param int   $fetchMode
+     * @param mixed $arg2
+     * @param mixed $arg3
+     */
+    public function setFetchMode($fetchMode, $arg2 = null, $arg3 = null) : bool // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         return true;
     }
 
-    public function fetch($fetchMode = null, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
+    /**
+     * @param int|null $fetchMode
+     * @param int      $cursorOrientation
+     * @param int      $cursorOffset
+     *
+     * @return mixed|false
+     */
+    public function fetch($fetchMode = null, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0) // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null) : array
+    /**
+     * @param int|null     $fetchMode
+     * @param int|null     $fetchArgument
+     * @param mixed[]|null $ctorArgs
+     *
+     * @return mixed[]
+     */
+    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null) : array // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    public function fetchColumn($columnIndex = 0)
+    /**
+     * @param int $columnIndex
+     *
+     * @return mixed|false
+     */
+    public function fetchColumn($columnIndex = 0) // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    public function bindValue($param, $value, $type = ParameterType::STRING) : bool
+    /**
+     * @param mixed    $param
+     * @param mixed    $value
+     * @param int|null $type
+     */
+    public function bindValue($param, $value, $type = ParameterType::STRING) : bool // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    public function bindParam($column, &$variable, $type = ParameterType::STRING, $length = null) : bool
+    /**
+     * @param mixed    $column
+     * @param mixed    $variable
+     * @param int|null $type
+     * @param int|null $length
+     */
+    public function bindParam($column, &$variable, $type = ParameterType::STRING, $length = null) : bool // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    public function errorCode()
+    public function errorCode() : bool
     {
         return false;
     }
 
+    /** @return mixed[] */
     public function errorInfo() : array
     {
         return [];
     }
 
-    public function execute($params = null) : bool
+    /** @param mixed[]|null $params */
+    public function execute($params = null) : bool // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         if ($params === null) {
             $params = [];

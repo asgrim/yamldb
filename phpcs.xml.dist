@@ -8,5 +8,8 @@
     <file>src</file>
     <file>test</file>
 
-    <rule ref="Doctrine"/>
+    <rule ref="Doctrine">
+        <exclude name="Generic.Files.LineLength.TooLong" />
+        <exclude name="Squiz.Commenting.FunctionComment.InvalidNoReturn" />
+    </rule>
 </ruleset>

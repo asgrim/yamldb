@@ -13,7 +13,7 @@ final class YamlDbSchemaManager extends AbstractSchemaManager
     /**
      * @param mixed[] $tableColumn
      */
-    protected function _getPortableTableColumnDefinition($tableColumn) : Column
+    protected function _getPortableTableColumnDefinition($tableColumn) : Column // phpcs:ignore
     {
         return new Column(
             $tableColumn['colname'],

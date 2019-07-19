@@ -9,27 +9,32 @@ use LogicException;
 
 final class YamlDbPlatform extends AbstractPlatform
 {
+    /** @param mixed[] $columnDef */
     public function getBooleanTypeDeclarationSQL(array $columnDef) : string
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
+    /** @param mixed[] $columnDef */
     public function getIntegerTypeDeclarationSQL(array $columnDef) : string
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
+    /** @param mixed[] $columnDef */
     public function getBigIntTypeDeclarationSQL(array $columnDef) : string
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
+    /** @param mixed[] $columnDef */
     public function getSmallIntTypeDeclarationSQL(array $columnDef) : string
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
-    protected function _getCommonIntegerTypeDeclarationSQL(array $columnDef) : string
+    /** @param mixed[] $columnDef */
+    protected function _getCommonIntegerTypeDeclarationSQL(array $columnDef) : string // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
@@ -39,11 +44,13 @@ final class YamlDbPlatform extends AbstractPlatform
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
+    /** @param mixed[] $field */
     public function getClobTypeDeclarationSQL(array $field) : string
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
+    /** @param mixed[] $field */
     public function getBlobTypeDeclarationSQL(array $field) : string
     {
         throw new LogicException('Not implemented yet: ' . __METHOD__);

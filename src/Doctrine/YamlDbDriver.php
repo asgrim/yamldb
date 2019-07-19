@@ -13,7 +13,13 @@ use Doctrine\DBAL\Schema\AbstractSchemaManager;
 
 final class YamlDbDriver implements Driver
 {
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = [])
+    /**
+     * @param mixed[]     $params
+     * @param string|null $username
+     * @param string|null $password
+     * @param mixed[]     $driverOptions
+     */
+    public function connect(array $params, $username = null, $password = null, array $driverOptions = []) : YamlDbConnection // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
     {
         Assert::that($params)->keyExists(YamlDb::class);
         Assert::that($params[YamlDb::class])->isInstanceOf(YamlDb::class);
