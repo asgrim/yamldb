@@ -6,4 +6,7 @@ namespace Asgrim\YamlDb;
 
 interface YamlDb
 {
+    public function insert(array $data) : YamlId;
+
+    public function findById(YamlId $id) : array;
 }
