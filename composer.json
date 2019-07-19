@@ -20,7 +20,8 @@
         "phpunit/phpunit": "^8.2",
         "vimeo/psalm": "^3.4",
         "doctrine/coding-standard": "^6.0",
-        "infection/infection": "^0.13.1"
+        "infection/infection": "^0.13.1",
+        "doctrine/dbal": "^2.9"
     },
     "autoload": {
         "psr-4": {

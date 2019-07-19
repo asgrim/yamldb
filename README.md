@@ -26,6 +26,30 @@ $generatedId = $yamlDb->insert(['foo' => 'bar']);
 $myData = $yamlDb->findById($generatedId); // ['foo' => 'bar']
 ```
 
+## Doctrine DBAL Driver
+
+You can now use YamlDb as a Doctrine DBAL driver. Note that not all queries are supported.
+
+```php
+use Asgrim\YamlDb\Database\FlysystemBackedYamlDb;
+use Asgrim\YamlDb\Doctrine\YamlDbDriver;
+use Asgrim\YamlDb\YamlDb;
+use Doctrine\DBAL\Configuration;
+use Doctrine\DBAL\DriverManager;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
+
+$doctrineConnection = DriverManager::getConnection(
+    [
+        'driverClass' => YamlDbDriver::class,
+        YamlDb::class => new FlysystemBackedYamlDb(new Filesystem(new Local('/var/lib/yamldb'))),
+    ],
+    new Configuration()
+);
+
+$doctrineConnection->insert('myGreatTable', ['foo' => 'bar']);
+```
+
 ## Why
 
 Why not.
