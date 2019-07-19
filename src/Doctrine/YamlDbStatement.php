@@ -48,6 +48,16 @@ final class YamlDbStatement implements IteratorAggregate, Statement
         return $this->replaceParamsInStatement($statement, $params);
     }
 
+    private function unquoteIdentifier(string $value): string
+    {
+        return trim($value, "` \t\n\r\0\x0B");
+    }
+
+    private function unquoteValue(string $value): string
+    {
+        return trim($value,"\"' \t\n\r\0\x0B");
+    }
+
     /**
      * @param array<string|int, mixed> $params
      */
@@ -57,8 +67,8 @@ final class YamlDbStatement implements IteratorAggregate, Statement
 
         if ((stripos($statement, 'INSERT') === 0) && preg_match(self::SUPPORTED_INSERT_FORMAT, $statement, $matches) === 1) {
             $tableName = $matches[1];
-            $columns = array_map('trim', explode(',', $matches[2]));
-            $values = array_map('trim', explode(',', $matches[3]));
+            $columns = array_map([$this, 'unquoteIdentifier'], explode(',', $matches[2]));
+            $values = array_map([$this, 'unquoteValue'], explode(',', $matches[3]));
 
             $colsWithValues = array_combine($columns, $values);
 
@@ -260,8 +270,12 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function execute($params = null)
     {
+        if ($params === null) {
+            $params = [];
+        }
         $this->deconstructAndExecute($this->statement, $params);
         $this->affectedRows++;
+        return true;
     }
 
     /**

@@ -36,7 +36,7 @@ final class YamlDbConnection implements Connection
      */
     public function query()
     {
-        // TODO: Implement query() method.
+        return new YamlDbStatement(func_get_args()[0], $this->yamlDb);
     }
 
     /**
