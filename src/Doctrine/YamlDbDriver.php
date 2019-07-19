@@ -21,41 +21,21 @@ final class YamlDbDriver implements Driver
         return new YamlDbConnection($params[YamlDb::class]);
     }
 
-    /**
-     * Gets the DatabasePlatform instance that provides all the metadata about
-     * the platform this driver connects to.
-     *
-     * @return AbstractPlatform The database platform.
-     */
     public function getDatabasePlatform() : AbstractPlatform
     {
         return new YamlDbPlatform();
     }
 
-    /**
-     * Gets the SchemaManager that can be used to inspect and change the underlying
-     * database schema of the platform this driver connects to.
-     */
     public function getSchemaManager(Connection $conn) : AbstractSchemaManager
     {
         return new YamlDbSchemaManager($conn);
     }
 
-    /**
-     * Gets the name of the driver.
-     *
-     * @return string The name of the driver.
-     */
     public function getName() : string
     {
         return 'yamldb';
     }
 
-    /**
-     * Gets the name of the database connected to for this driver.
-     *
-     * @return string The name of the database.
-     */
     public function getDatabase(Connection $conn) : string
     {
         return 'yamldb';

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace AsgrimUnitTest\YamlDb\Doctrine;
@@ -11,6 +12,7 @@ use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
+use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -46,13 +48,13 @@ final class DoctrineIntegrationTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testInsertUsingDbalInsertMethod() : void
     {
         $this->yamlDb->expects(self::once())
             ->method('insert')
-            ->with(['table' => 'test', 'row' => ['foo' => 'bar', 'bat' => 'baz']] )
+            ->with(['table' => 'test', 'row' => ['foo' => 'bar', 'bat' => 'baz']])
             ->willReturn(YamlId::new());
 
         self::assertSame(1, $this->doctrine->insert('test', ['foo' => 'bar', 'bat' => 'baz']));
@@ -60,13 +62,13 @@ final class DoctrineIntegrationTest extends TestCase
 
     /**
      * @throws DBALException
-     * @throws \Exception
+     * @throws Exception
      */
     public function testInsertUsingQueryWithSqlMethodAndNoParameters() : void
     {
         $this->yamlDb->expects(self::once())
             ->method('insert')
-            ->with(['table' => 'testTable', 'row' => ['foo' => 'bar']] )
+            ->with(['table' => 'testTable', 'row' => ['foo' => 'bar']])
             ->willReturn(YamlId::new());
 
         $statement = $this->doctrine->query('INSERT INTO testTable (foo) VALUES(\'bar\')');

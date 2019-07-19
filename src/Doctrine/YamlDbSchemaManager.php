@@ -11,8 +11,6 @@ use Doctrine\DBAL\Types\Type;
 final class YamlDbSchemaManager extends AbstractSchemaManager
 {
     /**
-     * Gets Table Column Definition.
-     *
      * @param mixed[] $tableColumn
      */
     protected function _getPortableTableColumnDefinition($tableColumn) : Column
