@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Asgrim\YamlDb\Doctrine;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use LogicException;
 
 final class YamlDbPlatform extends AbstractPlatform
 {
@@ -11,103 +13,85 @@ final class YamlDbPlatform extends AbstractPlatform
      * Returns the SQL snippet that declares a boolean column.
      *
      * @param mixed[] $columnDef
-     *
-     * @return string
      */
-    public function getBooleanTypeDeclarationSQL(array $columnDef)
+    public function getBooleanTypeDeclarationSQL(array $columnDef) : string
     {
-        // TODO: Implement getBooleanTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Returns the SQL snippet that declares a 4 byte integer column.
      *
      * @param mixed[] $columnDef
-     *
-     * @return string
      */
-    public function getIntegerTypeDeclarationSQL(array $columnDef)
+    public function getIntegerTypeDeclarationSQL(array $columnDef) : string
     {
-        // TODO: Implement getIntegerTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Returns the SQL snippet that declares an 8 byte integer column.
      *
      * @param mixed[] $columnDef
-     *
-     * @return string
      */
-    public function getBigIntTypeDeclarationSQL(array $columnDef)
+    public function getBigIntTypeDeclarationSQL(array $columnDef) : string
     {
-        // TODO: Implement getBigIntTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Returns the SQL snippet that declares a 2 byte integer column.
      *
      * @param mixed[] $columnDef
-     *
-     * @return string
      */
-    public function getSmallIntTypeDeclarationSQL(array $columnDef)
+    public function getSmallIntTypeDeclarationSQL(array $columnDef) : string
     {
-        // TODO: Implement getSmallIntTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Returns the SQL snippet that declares common properties of an integer column.
      *
      * @param mixed[] $columnDef
-     *
-     * @return string
      */
-    protected function _getCommonIntegerTypeDeclarationSQL(array $columnDef)
+    protected function _getCommonIntegerTypeDeclarationSQL(array $columnDef) : string
     {
-        // TODO: Implement _getCommonIntegerTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Lazy load Doctrine Type Mappings.
-     *
-     * @return void
      */
-    protected function initializeDoctrineTypeMappings()
+    protected function initializeDoctrineTypeMappings() : void
     {
-        // TODO: Implement initializeDoctrineTypeMappings() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Returns the SQL snippet used to declare a CLOB column type.
      *
      * @param mixed[] $field
-     *
-     * @return string
      */
-    public function getClobTypeDeclarationSQL(array $field)
+    public function getClobTypeDeclarationSQL(array $field) : string
     {
-        // TODO: Implement getClobTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Returns the SQL Snippet used to declare a BLOB column type.
      *
      * @param mixed[] $field
-     *
-     * @return string
      */
-    public function getBlobTypeDeclarationSQL(array $field)
+    public function getBlobTypeDeclarationSQL(array $field) : string
     {
-        // TODO: Implement getBlobTypeDeclarationSQL() method.
+        throw new LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
      * Gets the name of the platform.
-     *
-     * @return string
      */
-    public function getName()
+    public function getName() : string
     {
-        // TODO: Implement getName() method.
+        return 'yamldb';
     }
 }

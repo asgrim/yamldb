@@ -9,4 +9,6 @@ interface YamlDb
     public function insert(array $data) : YamlId;
 
     public function findById(YamlId $id) : array;
+
+    public function lastInsertId() : ?YamlId;
 }

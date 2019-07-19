@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Asgrim\YamlDb\Doctrine;
@@ -13,10 +14,8 @@ final class YamlDbSchemaManager extends AbstractSchemaManager
      * Gets Table Column Definition.
      *
      * @param mixed[] $tableColumn
-     *
-     * @return Column
      */
-    protected function _getPortableTableColumnDefinition($tableColumn)
+    protected function _getPortableTableColumnDefinition($tableColumn) : Column
     {
         return new Column(
             $tableColumn['colname'],

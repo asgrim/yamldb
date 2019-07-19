@@ -23,6 +23,9 @@ final class FlysystemBackedYamlDb implements YamlDb
     /** @var FilesystemInterface */
     private $dataPath;
 
+    /** @var YamlId|null */
+    private $lastInsertId;
+
     public function __construct(FilesystemInterface $dataPath)
     {
         $this->dataPath = $dataPath;
@@ -72,6 +75,8 @@ final class FlysystemBackedYamlDb implements YamlDb
 
         $this->persist($dbContent);
 
+        $this->lastInsertId = $id;
+
         return $id;
     }
 
@@ -89,5 +94,10 @@ final class FlysystemBackedYamlDb implements YamlDb
         }
 
         return $dbContent[$id->asString()];
+    }
+
+    public function lastInsertId() : ?YamlId
+    {
+        return $this->lastInsertId;
     }
 }

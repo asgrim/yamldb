@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Asgrim\YamlDb\Doctrine;
 
 use Asgrim\YamlDb\YamlDb;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\ParameterType;
+use LogicException;
+use function func_get_args;
 
 final class YamlDbConnection implements Connection
 {
@@ -19,61 +23,52 @@ final class YamlDbConnection implements Connection
 
     /**
      * Prepares a statement for execution and returns a Statement object.
-     *
-     * @param string $prepareString
-     *
-     * @return Statement
      */
-    public function prepare($prepareString)
+    public function prepare($prepareString) : Statement
     {
         return new YamlDbStatement($prepareString, $this->yamlDb);
     }
 
     /**
      * Executes an SQL statement, returning a result set as a Statement object.
-     *
-     * @return Statement
      */
-    public function query()
+    public function query() : Statement
     {
-        return new YamlDbStatement(func_get_args()[0], $this->yamlDb);
+        $args = func_get_args();
+        return new YamlDbStatement($args[0], $this->yamlDb);
     }
 
     /**
      * Quotes a string for use in a query.
      *
      * @param mixed $input
-     * @param int $type
      *
      * @return mixed
      */
     public function quote($input, $type = ParameterType::STRING)
     {
-        // TODO: Implement quote() method.
+        return $input;
     }
 
     /**
      * Executes an SQL statement and return the number of affected rows.
-     *
-     * @param string $statement
-     *
-     * @return int
      */
-    public function exec($statement)
+    public function exec($statement) : int
     {
-        // TODO: Implement exec() method.
+        $doctrineStatement = $this->prepare($statement);
+        $doctrineStatement->execute();
+
+        return $doctrineStatement->rowCount();
     }
 
     /**
      * Returns the ID of the last inserted row or sequence value.
-     *
-     * @param string|null $name
-     *
-     * @return string
      */
-    public function lastInsertId($name = null)
+    public function lastInsertId($name = null) : string
     {
-        // TODO: Implement lastInsertId() method.
+        $lastInsertId = $this->yamlDb->lastInsertId();
+
+        return $lastInsertId ? $lastInsertId->asString() : '';
     }
 
     /**
@@ -81,9 +76,9 @@ final class YamlDbConnection implements Connection
      *
      * @return bool TRUE on success or FALSE on failure.
      */
-    public function beginTransaction()
+    public function beginTransaction() : bool
     {
-        // TODO: Implement beginTransaction() method.
+        throw new LogicException('Transactions are not supported');
     }
 
     /**
@@ -91,9 +86,9 @@ final class YamlDbConnection implements Connection
      *
      * @return bool TRUE on success or FALSE on failure.
      */
-    public function commit()
+    public function commit() : bool
     {
-        // TODO: Implement commit() method.
+        throw new LogicException('Transactions are not supported');
     }
 
     /**
@@ -101,9 +96,9 @@ final class YamlDbConnection implements Connection
      *
      * @return bool TRUE on success or FALSE on failure.
      */
-    public function rollBack()
+    public function rollBack() : bool
     {
-        // TODO: Implement rollBack() method.
+        throw new LogicException('Transactions are not supported');
     }
 
     /**
@@ -111,9 +106,9 @@ final class YamlDbConnection implements Connection
      *
      * @return string|null The error code, or null if no operation has been run on the database handle.
      */
-    public function errorCode()
+    public function errorCode() : ?string
     {
-        // TODO: Implement errorCode() method.
+        return null;
     }
 
     /**
@@ -121,8 +116,8 @@ final class YamlDbConnection implements Connection
      *
      * @return mixed[]
      */
-    public function errorInfo()
+    public function errorInfo() : array
     {
-        // TODO: Implement errorInfo() method.
+        return [];
     }
 }

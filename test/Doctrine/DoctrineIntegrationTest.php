@@ -15,9 +15,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * @covers \Asgrim\YamlDb\Doctrine\YamlDbConnection
  * @covers \Asgrim\YamlDb\Doctrine\YamlDbDriver
  * @covers \Asgrim\YamlDb\Doctrine\YamlDbPlatform
  * @covers \Asgrim\YamlDb\Doctrine\YamlDbSchemaManager
+ * @covers \Asgrim\YamlDb\Doctrine\YamlDbStatement
  */
 final class DoctrineIntegrationTest extends TestCase
 {

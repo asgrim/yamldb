@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Asgrim\YamlDb\Doctrine;
@@ -16,6 +17,7 @@ final class YamlDbDriver implements Driver
     {
         Assert::that($params)->keyExists(YamlDb::class);
         Assert::that($params[YamlDb::class])->isInstanceOf(YamlDb::class);
+
         return new YamlDbConnection($params[YamlDb::class]);
     }
 
@@ -25,7 +27,7 @@ final class YamlDbDriver implements Driver
      *
      * @return AbstractPlatform The database platform.
      */
-    public function getDatabasePlatform()
+    public function getDatabasePlatform() : AbstractPlatform
     {
         return new YamlDbPlatform();
     }
@@ -33,10 +35,8 @@ final class YamlDbDriver implements Driver
     /**
      * Gets the SchemaManager that can be used to inspect and change the underlying
      * database schema of the platform this driver connects to.
-     *
-     * @return AbstractSchemaManager
      */
-    public function getSchemaManager(Connection $conn)
+    public function getSchemaManager(Connection $conn) : AbstractSchemaManager
     {
         return new YamlDbSchemaManager($conn);
     }
@@ -46,7 +46,7 @@ final class YamlDbDriver implements Driver
      *
      * @return string The name of the driver.
      */
-    public function getName()
+    public function getName() : string
     {
         return 'yamldb';
     }
@@ -56,8 +56,8 @@ final class YamlDbDriver implements Driver
      *
      * @return string The name of the database.
      */
-    public function getDatabase(Connection $conn)
+    public function getDatabase(Connection $conn) : string
     {
-        return 'yaml';
+        return 'yamldb';
     }
 }

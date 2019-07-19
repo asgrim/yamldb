@@ -40,7 +40,6 @@ final class YamlDbStatement implements IteratorAggregate, Statement
             return $statement;
         }
 
-        /** @var string|null $statement */
         $statement = preg_replace('/(\?)/', reset($params), $statement, 1);
         Assert::that($statement)->string('Failed to preg_replace a parameter out');
         array_shift($params);
@@ -85,7 +84,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function closeCursor()
     {
-        // TODO: Implement closeCursor() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
@@ -97,7 +96,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function columnCount()
     {
-        // TODO: Implement columnCount() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
@@ -111,7 +110,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function setFetchMode($fetchMode, $arg2 = null, $arg3 = null)
     {
-        // TODO: Implement setFetchMode() method.
+        return true;
     }
 
     /**
@@ -141,7 +140,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function fetch($fetchMode = null, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
     {
-        // TODO: Implement fetch() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
@@ -166,7 +165,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
     {
-        // TODO: Implement fetchAll() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
@@ -179,7 +178,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function fetchColumn($columnIndex = 0)
     {
-        // TODO: Implement fetchColumn() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
@@ -200,7 +199,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function bindValue($param, $value, $type = ParameterType::STRING)
     {
-        // TODO: Implement bindValue() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 
     /**
@@ -231,17 +230,19 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function bindParam($column, &$variable, $type = ParameterType::STRING, $length = null)
     {
-        // TODO: Implement bindParam() method.
-    }/**
- * Fetches the SQLSTATE associated with the last operation on the statement handle.
- *
- * @return string|int|bool The error code string.
- * @see Doctrine_Adapter_Interface::errorCode()
- *
- */
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
+    }
+
+    /**
+     * Fetches the SQLSTATE associated with the last operation on the statement handle.
+     *
+     * @return string|int|bool The error code string.
+     * @see Doctrine_Adapter_Interface::errorCode()
+     *
+     */
     public function errorCode()
     {
-        // TODO: Implement errorCode() method.
+        return false;
     }
 
     /**
@@ -251,7 +252,7 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function errorInfo()
     {
-        // TODO: Implement errorInfo() method.
+        return [];
     }
 
     /**
@@ -304,6 +305,6 @@ final class YamlDbStatement implements IteratorAggregate, Statement
      */
     public function getIterator()
     {
-        // TODO: Implement getIterator() method.
+        throw new \LogicException('Not implemented yet: ' . __METHOD__);
     }
 }
